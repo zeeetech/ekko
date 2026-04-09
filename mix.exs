@@ -17,7 +17,7 @@ defmodule Ekko.MixProject do
 
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :public_key, :crypto, :inets, :ssl],
       mod: {Ekko.Application, []}
     ]
   end
@@ -27,6 +27,10 @@ defmodule Ekko.MixProject do
 
   defp deps do
     [
+      {:plug, "~> 1.16"},
+      {:finch, "~> 0.18"},
+      {:mox, "~> 1.2", only: :test},
+      {:bypass, "~> 2.1", only: :test},
       {:stream_data, "~> 1.0", only: [:test, :dev]},
       {:ex_doc, ">= 0.0.0", only: [:dev, :test], runtime: false},
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},

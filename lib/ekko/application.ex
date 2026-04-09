@@ -1,6 +1,4 @@
 defmodule Ekko.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
   @moduledoc false
 
   use Application
@@ -8,12 +6,10 @@ defmodule Ekko.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: Ekko.Worker.start_link(arg)
-      # {Ekko.Worker, arg}
+      {Finch, name: Ekko.Finch},
+      Ekko.Crypto.CertCache
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Ekko.Supervisor]
     Supervisor.start_link(children, opts)
   end
