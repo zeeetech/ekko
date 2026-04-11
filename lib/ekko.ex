@@ -107,6 +107,7 @@ defmodule Ekko do
   defp run_lifecycle(skill, ekko, inner) do
     with {:ok, ekko} <- skill.before_request(ekko),
          {:ok, response} <- call_handler(skill, inner, ekko),
+         {:ok, response} <- validate_response(inner, response),
          {:ok, response} <- skill.after_request(ekko, response) do
       {:ok, merge_session_attributes(response, ekko)}
     else
@@ -124,6 +125,27 @@ defmodule Ekko do
   end
 
   defp merge_session_attributes(response, _ekko), do: response
+
+  @audio_player_forbidden_fields ["outputSpeech", "card", "reprompt"]
+
+  defp validate_response(%Request.AudioPlayer{}, response) do
+    check_audio_response(response)
+  end
+
+  defp validate_response(%Request.PlaybackController{}, response) do
+    check_audio_response(response)
+  end
+
+  defp validate_response(_inner, response), do: {:ok, response}
+
+  defp check_audio_response(%{"response" => inner} = response) do
+    case Enum.find(@audio_player_forbidden_fields, &Map.has_key?(inner, &1)) do
+      nil -> {:ok, response}
+      field -> {:error, {:invalid_audio_player_response, field}}
+    end
+  end
+
+  defp check_audio_response(response), do: {:ok, response}
 
   # ── Speech ──────────────────────────────────────────────────────────────────
 

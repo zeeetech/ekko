@@ -7,7 +7,8 @@ defmodule Ekko.Application do
   def start(_type, _args) do
     children = [
       {Finch, name: Ekko.Finch},
-      Ekko.Crypto.CertCache
+      Ekko.Crypto.CertCache,
+      Ekko.AudioPlayer.PlaylistStore.ETS
     ]
 
     opts = [strategy: :one_for_one, name: Ekko.Supervisor]

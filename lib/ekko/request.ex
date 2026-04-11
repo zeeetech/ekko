@@ -15,14 +15,18 @@ defmodule Ekko.Request do
   alias Ekko.Request.Context
   alias Ekko.Request.Intent
   alias Ekko.Request.Launch
+  alias Ekko.Request.PlaybackController
   alias Ekko.Request.Session
   alias Ekko.Request.SessionEnded
+  alias Ekko.Request.SystemException
 
   @type inner ::
           Launch.t()
           | Intent.t()
           | SessionEnded.t()
           | AudioPlayer.t()
+          | PlaybackController.t()
+          | SystemException.t()
 
   @type t :: %__MODULE__{
           version: String.t(),
@@ -57,6 +61,8 @@ defmodule Ekko.Request do
   defp parse_request(%{"type" => "IntentRequest"} = raw), do: Intent.from_map(raw)
   defp parse_request(%{"type" => "SessionEndedRequest"} = raw), do: SessionEnded.from_map(raw)
   defp parse_request(%{"type" => "AudioPlayer." <> _} = raw), do: AudioPlayer.from_map(raw)
+  defp parse_request(%{"type" => "PlaybackController." <> _} = raw), do: PlaybackController.from_map(raw)
+  defp parse_request(%{"type" => "System.ExceptionEncountered"} = raw), do: SystemException.from_map(raw)
   defp parse_request(%{"type" => type}), do: {:error, {:unknown_request_type, type}}
   defp parse_request(_), do: {:error, :malformed_request}
 end

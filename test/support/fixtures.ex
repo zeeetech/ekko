@@ -123,6 +123,55 @@ defmodule Ekko.Test.Fixtures do
     }
   end
 
+  @spec playback_controller_next() :: map()
+  def playback_controller_next do
+    %{
+      "version" => "1.0",
+      "context" => context_with_audio_state(),
+      "request" => %{
+        "type" => "PlaybackController.NextCommandIssued",
+        "requestId" => "amzn1.echo-api.request.0000-pc-next",
+        "timestamp" => "2026-04-09T10:00:06Z",
+        "locale" => "en-US"
+      }
+    }
+  end
+
+  @spec playback_controller_play() :: map()
+  def playback_controller_play do
+    %{
+      "version" => "1.0",
+      "context" => context_with_audio_state(),
+      "request" => %{
+        "type" => "PlaybackController.PlayCommandIssued",
+        "requestId" => "amzn1.echo-api.request.0000-pc-play",
+        "timestamp" => "2026-04-09T10:00:07Z",
+        "locale" => "en-US"
+      }
+    }
+  end
+
+  @spec system_exception_encountered() :: map()
+  def system_exception_encountered do
+    %{
+      "version" => "1.0",
+      "context" => context_with_audio_state(),
+      "request" => %{
+        "type" => "System.ExceptionEncountered",
+        "requestId" => "amzn1.echo-api.request.0000-sys-exc",
+        "timestamp" => "2026-04-09T10:00:08Z",
+        "locale" => "en-US",
+        "error" => %{
+          "type" => "INVALID_RESPONSE",
+          "message" => "An exception occurred while dispatching the request"
+        },
+        "cause" => %{
+          "requestId" => "amzn1.echo-api.request.0000-prev"
+        }
+      }
+    }
+  end
+
   defp session do
     %{
       "new" => true,
