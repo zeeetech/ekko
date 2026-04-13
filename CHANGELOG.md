@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1](https://github.com/zeeetech/ekko/compare/v0.1.0...v0.1.1) (2026-04-13)
+
+
+### Continuous Integration
+
+* focus on elixir 1.18 and 1.19 ([31e716d](https://github.com/zeeetech/ekko/commit/31e716d482ded5170a2a8fe1804298311beeb470))
+
 ## [0.1.0] - 2026-04-10
 
 ### Added
