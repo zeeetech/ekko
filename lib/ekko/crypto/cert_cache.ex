@@ -19,6 +19,7 @@ defmodule Ekko.Crypto.CertCache do
 
   @table :ekko_cert_cache
 
+  @doc "Starts the Agent that owns the ETS certificate cache table."
   @spec start_link(keyword()) :: Agent.on_start()
   def start_link(_opts) do
     Agent.start_link(

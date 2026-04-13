@@ -35,6 +35,7 @@ defmodule Ekko.Request.Intent do
 
   defstruct [:request_id, :timestamp, :locale, :dialog_state, :intent]
 
+  @doc "Parses a decoded `IntentRequest` JSON map."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(%{"type" => "IntentRequest", "requestId" => request_id, "timestamp" => ts, "intent" => intent_raw} = raw) do
     with {:ok, datetime, _offset} <- DateTime.from_iso8601(ts),

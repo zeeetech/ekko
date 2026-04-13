@@ -50,6 +50,7 @@ defmodule Ekko.Request.AudioPlayer do
     :current_playback_state
   ]
 
+  @doc "Parses a decoded `AudioPlayer.*` JSON map into a struct distinguished by `:event`."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(
         %{

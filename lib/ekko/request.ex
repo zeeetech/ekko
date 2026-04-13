@@ -37,6 +37,7 @@ defmodule Ekko.Request do
 
   defstruct [:version, :session, :context, :request]
 
+  @doc "Parses a decoded Alexa request JSON map into a `%Ekko.Request{}` envelope."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(%{"version" => version, "context" => context_raw, "request" => request_raw} = raw) do
     with {:ok, context} <- Context.from_map(context_raw),

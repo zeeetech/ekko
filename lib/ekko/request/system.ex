@@ -19,6 +19,7 @@ defmodule Ekko.Request.System do
 
   defstruct [:application, :user, :device, :api_endpoint, :api_access_token]
 
+  @doc "Parses a decoded `context.System` JSON map."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(raw) when is_map(raw) do
     {:ok,

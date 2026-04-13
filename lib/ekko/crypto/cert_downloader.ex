@@ -4,6 +4,7 @@ defmodule Ekko.Crypto.CertDownloader do
   of an Alexa signing certificate chain over HTTPS.
   """
 
+  @doc "Downloads the PEM certificate chain from the given URL via Finch."
   @spec download(String.t()) :: {:ok, binary()} | {:error, term()}
   def download(url) when is_binary(url) do
     :get

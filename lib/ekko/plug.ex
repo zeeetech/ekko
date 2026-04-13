@@ -43,6 +43,7 @@ defmodule Ekko.Plug do
 
   require Logger
 
+  @doc "Validates options and resolves the verifier module."
   @impl true
   def init(opts) do
     skill = Keyword.fetch!(opts, :skill)
@@ -50,6 +51,7 @@ defmodule Ekko.Plug do
     %{skill: skill, verifier: verifier}
   end
 
+  @doc "Reads the body, verifies the request, dispatches to the skill, and writes the JSON response."
   @impl true
   def call(conn, %{skill: skill, verifier: verifier}) do
     with {:ok, raw_body, conn} <- read_raw_body(conn),

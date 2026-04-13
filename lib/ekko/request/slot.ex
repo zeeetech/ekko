@@ -20,6 +20,7 @@ defmodule Ekko.Request.Slot do
 
   defstruct [:name, :value, :resolutions, confirmation_status: :none]
 
+  @doc "Parses a decoded slot JSON map."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(%{"name" => name} = raw) do
     {:ok,

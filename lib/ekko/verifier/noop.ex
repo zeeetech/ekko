@@ -11,6 +11,7 @@ defmodule Ekko.Verifier.NoOp do
 
   @behaviour Ekko.Verifier
 
+  @doc "Accepts any request body without verification. Decodes the JSON and returns the map."
   @impl true
   def verify(raw_body, _headers) when is_binary(raw_body) do
     case JSON.decode(raw_body) do

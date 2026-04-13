@@ -17,6 +17,7 @@ defmodule Ekko.Request.Session do
 
   defstruct [:session_id, :new?, :application, :user, attributes: %{}]
 
+  @doc "Parses a decoded session JSON map."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(%{"sessionId" => session_id, "new" => new?, "application" => application, "user" => user} = raw) do
     {:ok,

@@ -22,6 +22,7 @@ defmodule Ekko.Request.PlaybackController do
 
   defstruct [:command, :request_id, :timestamp, :locale]
 
+  @doc "Parses a decoded `PlaybackController.*` JSON map into a struct distinguished by `:command`."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(%{"type" => "PlaybackController." <> sub, "requestId" => request_id, "timestamp" => ts} = raw) do
     with {:ok, command} <- parse_command(sub),

@@ -34,17 +34,21 @@ defmodule Ekko.AttributesManager do
 
   def new(%Request{}), do: %__MODULE__{}
 
+  @doc "Returns the current request-scoped attributes."
   @spec get_request_attributes(t()) :: map()
   def get_request_attributes(%__MODULE__{request_attributes: attrs}), do: attrs
 
+  @doc "Replaces the request-scoped attributes."
   @spec set_request_attributes(t(), map()) :: t()
   def set_request_attributes(%__MODULE__{} = mgr, attrs) when is_map(attrs) do
     %{mgr | request_attributes: attrs}
   end
 
+  @doc "Returns the current session attributes."
   @spec get_session_attributes(t()) :: map()
   def get_session_attributes(%__MODULE__{session_attributes: attrs}), do: attrs
 
+  @doc "Replaces the session attributes that will be merged into the response."
   @spec set_session_attributes(t(), map()) :: t()
   def set_session_attributes(%__MODULE__{} = mgr, attrs) when is_map(attrs) do
     %{mgr | session_attributes: attrs}

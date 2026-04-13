@@ -17,6 +17,7 @@ defmodule Ekko.Request.SessionEnded do
 
   defstruct [:request_id, :timestamp, :locale, :reason, :error]
 
+  @doc "Parses a decoded `SessionEndedRequest` JSON map."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(%{"type" => "SessionEndedRequest", "requestId" => request_id, "timestamp" => ts} = raw) do
     case DateTime.from_iso8601(ts) do

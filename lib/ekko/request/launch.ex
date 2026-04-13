@@ -12,6 +12,7 @@ defmodule Ekko.Request.Launch do
 
   defstruct [:request_id, :timestamp, :locale]
 
+  @doc "Parses a decoded `LaunchRequest` JSON map."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(%{"type" => "LaunchRequest", "requestId" => request_id, "timestamp" => ts} = raw) do
     case DateTime.from_iso8601(ts) do

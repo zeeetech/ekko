@@ -21,6 +21,7 @@ defmodule Ekko.Request.SystemException do
 
   defstruct [:request_id, :timestamp, :locale, :error, :cause]
 
+  @doc "Parses a decoded `System.ExceptionEncountered` JSON map."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(
         %{

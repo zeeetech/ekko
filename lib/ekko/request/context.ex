@@ -15,6 +15,7 @@ defmodule Ekko.Request.Context do
 
   defstruct [:system, :audio_player]
 
+  @doc "Parses a decoded context JSON map."
   @spec from_map(map()) :: {:ok, t()} | {:error, term()}
   def from_map(raw) when is_map(raw) do
     with {:ok, system} <- parse_system(Map.get(raw, "System")),

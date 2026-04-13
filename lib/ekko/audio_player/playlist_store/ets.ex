@@ -16,6 +16,7 @@ defmodule Ekko.AudioPlayer.PlaylistStore.ETS do
 
   @table :ekko_audio_player_playlists
 
+  @doc "Starts the Agent that owns the ETS playlist table."
   @spec start_link(keyword()) :: Agent.on_start()
   def start_link(_opts) do
     Agent.start_link(
@@ -27,6 +28,7 @@ defmodule Ekko.AudioPlayer.PlaylistStore.ETS do
     )
   end
 
+  @doc "Retrieves the playlist for the given user, or `nil` if not found."
   @impl true
   def get(user_id) when is_binary(user_id) do
     case :ets.lookup(@table, user_id) do
@@ -35,12 +37,14 @@ defmodule Ekko.AudioPlayer.PlaylistStore.ETS do
     end
   end
 
+  @doc "Stores the playlist for the given user."
   @impl true
   def put(user_id, %Ekko.AudioPlayer.Playlist{} = playlist) when is_binary(user_id) do
     :ets.insert(@table, {user_id, playlist})
     :ok
   end
 
+  @doc "Removes the playlist for the given user."
   @impl true
   def delete(user_id) when is_binary(user_id) do
     :ets.delete(@table, user_id)

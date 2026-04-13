@@ -240,6 +240,7 @@ defmodule Ekko do
 
   # ── Session control ─────────────────────────────────────────────────────────
 
+  @doc "Sets whether Alexa should end the session after this response."
   @spec should_end_session(t(), boolean()) :: t()
   def should_end_session(%__MODULE__{} = ekko, value) when is_boolean(value) do
     %{ekko | should_end_session: value}
